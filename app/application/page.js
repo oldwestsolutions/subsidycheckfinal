@@ -2,7 +2,7 @@
 import { Container, Card, Button, Form, Tab, Tabs, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faLock, faUser, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faLock, faUser, faEnvelope, faPhone, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 export default function ApplicationPage() {
@@ -20,19 +20,18 @@ export default function ApplicationPage() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Login attempt', formData);
+    // Accept any credentials for testing
     setIsAuthenticated(true);
   };
 
   const handleSignup = (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-    // Add your signup logic here
-    console.log('Signup attempt', formData);
+    // Accept any credentials for testing
+    setIsAuthenticated(true);
+  };
+
+  // Add a demo login button
+  const handleDemoLogin = () => {
     setIsAuthenticated(true);
   };
 
@@ -228,15 +227,49 @@ export default function ApplicationPage() {
                   </Form>
                 </Tab>
               </Tabs>
+              
+              {/* Add demo button below the tabs */}
+              <div className="text-center mt-4 pt-3 border-top">
+                <p className="text-muted mb-2">Want to explore the application?</p>
+                <Button 
+                  variant="outline-success"
+                  onClick={handleDemoLogin}
+                  className="demo-button"
+                >
+                  Try Demo Version
+                </Button>
+              </div>
             </Card.Body>
           </Card>
         </Container>
+
+        <footer className="application-footer">
+          <Container>
+            <div className="footer-content">
+              <div className="security-info">
+                <FontAwesomeIcon icon={faShieldAlt} className="me-2 text-success" />
+                <span>Secure Government Portal</span>
+                <span className="separator mx-3">|</span>
+                <FontAwesomeIcon icon={faLock} className="me-2 text-success" />
+                <span>256-bit SSL Encryption</span>
+              </div>
+              <div className="footer-links">
+                <a href="#" className="footer-link">Privacy Policy</a>
+                <span className="separator mx-3">|</span>
+                <a href="#" className="footer-link">Terms of Service</a>
+                <span className="separator mx-3">|</span>
+                <a href="#" className="footer-link">Help Center</a>
+              </div>
+            </div>
+          </Container>
+        </footer>
 
         <style jsx global>{`
           .application-page {
             background-color: #f8f9fa;
             min-height: 100vh;
             padding-top: 76px;
+            padding-bottom: 80px;
           }
           .auth-card {
             max-width: 600px;
@@ -297,6 +330,70 @@ export default function ApplicationPage() {
             color: #dee2e6;
             font-weight: 200;
           }
+          .application-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            font-size: 0.875rem;
+          }
+
+          .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+          }
+
+          .security-info {
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+          }
+
+          .footer-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+          }
+
+          .footer-link {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.2s ease;
+          }
+
+          .footer-link:hover {
+            color: #198754;
+          }
+
+          @media (max-width: 768px) {
+            .footer-content {
+              flex-direction: column;
+              text-align: center;
+            }
+
+            .security-info, .footer-links {
+              justify-content: center;
+            }
+          }
+
+          .demo-button {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+          }
+
+          .border-top {
+            border-color: rgba(0, 0, 0, 0.1) !important;
+          }
         `}</style>
       </div>
     );
@@ -308,7 +405,7 @@ export default function ApplicationPage() {
         <Card className="welcome-card">
           <Card.Body className="text-center p-5">
             <div className="welcome-icon mb-4">
-              <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
+              <FontAwesomeIcon icon={faUser} className="text-success" />
             </div>
             <h1 className="mb-4">Welcome to Your Benefits Application</h1>
             <p className="lead mb-4">
@@ -325,11 +422,6 @@ export default function ApplicationPage() {
               </ul>
             </div>
 
-            <div className="progress-section mb-4">
-              <p className="text-muted mb-2">Application Progress</p>
-              <ProgressBar now={0} label="Not Started" className="mb-3" />
-            </div>
-
             <Link href="/application/personal">
               <Button 
                 variant="success" 
@@ -343,11 +435,28 @@ export default function ApplicationPage() {
         </Card>
       </Container>
 
+      <footer className="application-footer">
+        <Container>
+          <div className="footer-content">
+            <div className="security-info">
+              <FontAwesomeIcon icon={faShieldAlt} className="me-2 text-success" />
+              <span>Secure Government Portal</span>
+            </div>
+            <div className="footer-links">
+              <a href="#" className="footer-link">Privacy Policy</a>
+              <span className="separator mx-3">|</span>
+              <a href="#" className="footer-link">Help Center</a>
+            </div>
+          </div>
+        </Container>
+      </footer>
+
       <style jsx global>{`
         .application-page {
           background-color: #f8f9fa;
           min-height: 100vh;
           padding-top: 76px;
+          padding-bottom: 80px;
         }
         .welcome-card {
           max-width: 800px;
@@ -400,15 +509,34 @@ export default function ApplicationPage() {
           transform: translateY(-2px);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .progress-section {
+        .application-footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
           padding: 1rem 0;
+          font-size: 0.875rem;
         }
-        :global(.progress) {
-          height: 10px;
-          border-radius: 5px;
+        .footer-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 1rem;
         }
-        :global(.progress-bar) {
-          background-color: #198754;
+        .footer-link {
+          color: #6c757d;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+        .footer-link:hover {
+          color: #198754;
+        }
+        .separator {
+          color: #dee2e6;
         }
       `}</style>
     </div>

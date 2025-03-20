@@ -1,10 +1,15 @@
 "use client";
-import { Container, Card, Button, Row, Col, Table } from 'react-bootstrap';
+import { Container, Card, Button, Form, Row, Col, Table, Spinner } from 'react-bootstrap';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCheck, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCheck, faEdit, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ReviewApplication() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
   // This would normally be populated from a form state management system
   const mockData = {
     personal: {
@@ -28,6 +33,25 @@ export default function ReviewApplication() {
       ]
     }
   };
+
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      router.push('/application/success');
+    }, 2000);
+  };
+
+  if (isSubmitting) {
+    return (
+      <div className="application-page d-flex align-items-center justify-content-center">
+        <div className="text-center">
+          <Spinner animation="border" variant="success" className="mb-4" />
+          <h3 className="text-muted">Submitting your application...</h3>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="application-page">
@@ -142,6 +166,7 @@ export default function ReviewApplication() {
                 variant="success" 
                 size="lg"
                 className="submit-button"
+                onClick={handleSubmit}
               >
                 <FontAwesomeIcon icon={faCheck} className="me-2" />
                 Submit Application

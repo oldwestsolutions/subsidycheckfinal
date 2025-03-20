@@ -2,10 +2,34 @@
 import { Navbar, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect } from 'react';
 
 export default function MainNavbar() {
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const controlNavbar = () => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > lastScrollY) { // scroll down
+        setShow(false);
+      } else { // scroll up
+        setShow(true);
+      }
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
+
   return (
-    <div className="navbar-wrapper">
+    <div className={`navbar-wrapper ${show ? 'show' : 'hide'}`}>
       <Navbar className="navbar-custom" fixed="top">
         <Container>
           <Navbar.Brand href="/" className="d-flex align-items-center">
@@ -22,6 +46,13 @@ export default function MainNavbar() {
           left: 0;
           right: 0;
           z-index: 1030;
+          transition: transform 0.3s ease-in-out;
+        }
+        .navbar-wrapper.hide {
+          transform: translateY(-100%);
+        }
+        .navbar-wrapper.show {
+          transform: translateY(0);
         }
         .navbar-custom {
           background: rgba(52, 58, 64, 0.95);
