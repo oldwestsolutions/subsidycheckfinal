@@ -1,5 +1,6 @@
 "use client";
 import { Container, Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -8,18 +9,22 @@ export default function Hero() {
         <Container>
           <div className="hero-content text-white py-5">
             <div className="content-background">
-              <h1 className="display-2 fw-bold mb-4">Apply for Benefits Today</h1>
-              <p className="lead mb-4">
-                Get the support you need through our streamlined application process. 
-                One application connects you to multiple assistance programs.
+              <h1 className="display-4 fw-bold mb-4">
+                Streamlined Benefits Access
+              </h1>
+              <p className="lead mb-4 fw-normal">
+                Access multiple assistance programs through our simplified application process. 
+                Get the support you need with just one application.
               </p>
-              <Button 
-                variant="warning" 
-                size="lg" 
-                className="px-4 py-2"
-              >
-                Start Application →
-              </Button>
+              <Link href="/application">
+                <Button 
+                  variant="success" 
+                  size="lg" 
+                  className="custom-button"
+                >
+                  Begin Your Application
+                </Button>
+              </Link>
             </div>
           </div>
         </Container>
@@ -35,9 +40,9 @@ export default function Hero() {
         .hero-overlay {
           background: linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.6) 50%,
-            rgba(0, 0, 0, 0.4) 100%
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.75) 50%,
+            rgba(0, 0, 0, 0.65) 100%
           );
           height: 100%;
           width: 100%;
@@ -45,13 +50,33 @@ export default function Hero() {
           align-items: center;
         }
         .hero-content {
-          max-width: 600px;
+          max-width: 650px;
         }
         .content-background {
-          background: rgba(0, 0, 0, 0.5);
-          padding: 2rem;
-          border-radius: 10px;
-          backdrop-filter: blur(5px);
+          background: rgba(0, 0, 0, 0.6);
+          padding: 2.5rem;
+          border-radius: 12px;
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        :global(.custom-button) {
+          background-color: #198754;
+          border: none;
+          padding: 0.8rem 2rem;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        :global(.custom-button:hover) {
+          background-color: #146c43;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+        :global(.lead) {
+          font-size: 1.25rem;
+          line-height: 1.6;
         }
       `}</style>
     </div>

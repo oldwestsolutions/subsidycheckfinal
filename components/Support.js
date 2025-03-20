@@ -1,7 +1,7 @@
 "use client";
-import { Container, Row, Col, Accordion } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export default function Support() {
   const faqs = [
@@ -27,8 +27,7 @@ export default function Support() {
             <h2>Need Help?</h2>
             <p className="mb-4">
               Our dedicated support team is here to assist you through every
-              step of the application process. Get help in multiple languages and
-              through various channels.
+              step of the application process. Get help in multiple languages.
             </p>
 
             <div className="support-options">
@@ -37,14 +36,6 @@ export default function Support() {
                 <div>
                   <h3 className="h5">Phone Support</h3>
                   <p className="text-muted">Available Mon-Fri, 8am-6pm</p>
-                </div>
-              </div>
-
-              <div className="support-item mb-4">
-                <FontAwesomeIcon icon={faUser} className="text-success me-3" />
-                <div>
-                  <h3 className="h5">In-Person Assistance</h3>
-                  <p className="text-muted">Book an appointment at your local office</p>
                 </div>
               </div>
 
@@ -61,14 +52,14 @@ export default function Support() {
           <Col lg={6}>
             <div className="faq-section">
               <h2>Frequently Asked Questions</h2>
-              <Accordion className="mt-4">
+              <div className="mt-4">
                 {faqs.map((faq, index) => (
-                  <Accordion.Item key={index} eventKey={index.toString()}>
-                    <Accordion.Header>{faq.question}</Accordion.Header>
-                    <Accordion.Body>{faq.answer}</Accordion.Body>
-                  </Accordion.Item>
+                  <div key={index} className="mb-3">
+                    <strong>{faq.question}</strong>
+                    <p>{faq.answer}</p>
+                  </div>
                 ))}
-              </Accordion>
+              </div>
             </div>
           </Col>
         </Row>
