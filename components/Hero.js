@@ -31,7 +31,7 @@ export default function Hero() {
       </div>
       <style jsx>{`
         .hero-section {
-          background-image: url('/StateBenefitshero.png');
+          background-image: url('/winter.png');
           background-size: cover;
           background-position: center;
           height: 80vh;
@@ -40,9 +40,9 @@ export default function Hero() {
         .hero-overlay {
           background: linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.85) 0%,
-            rgba(0, 0, 0, 0.75) 50%,
-            rgba(0, 0, 0, 0.65) 100%
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.65) 50%,
+            rgba(0, 0, 0, 0.55) 100%
           );
           height: 100%;
           width: 100%;
